@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/app.js' %}"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card mb-10">
+          <div class="card-body store-body">
+              <div class="product-seller-recommended">
+                <!-- /.recommended-items-->
+                <div class="product-description mb-5">
+                {% if offer.photos %}
+                       <img src="{{ offer.photos.url }}" style="width: 50%;"alt="">
+                {% endif %}
+                  <h2 class="mb-5">{{ offer.title }}</h2>
+                    <h2> <strong>Cena: {{ offer.price }}</strong> zł</h2>
+                  <dl class="row mb-5">
+
+                      {% if offer.apartament %}
+                    <dt class="col-sm-3">Rodzaj zabudowy: </dt>
+                    <dd class="col-sm-9">{{ offer.apartament.type }} </dd>
+                    <dt class="col-sm-3">Piętro:</dt>
+                    <dd class="col-sm-9">{{ offer.apartament.level }}</dd>
+                    <dt class="col-sm-3">Umeblowanie:</dt>
+                    <dd class="col-sm-9">{{ offer.apartament.furniture }}</dd>
+                    <dt class="col-sm-3">Liczba pokoi: </dt>
+                    <dd class="col-sm-9">{{ offer.apartament.number_room }}</dd>
+                  {% endif %}
+
+                  {% if offer.home %}
+                    <dt class="col-sm-3">Rodzaj zabudowy:</dt>
+                    <dd class="col-sm-9">{{ offer.home.type }}</dd>
+                    <dt class="col-sm-3">Umeblowanie:</dt>
+                    <dd class="col-sm-9">{{ offer.home.furniture }}</dd>
+                    <dt class="col-sm-3">Piętra:</dt>
+                    <dd class="col-sm-9">{{ offer.home.floor }}</dd>
+                    <dt class="col-sm-3">Powierzchnia działki:</dt>
+                    <dd class="col-sm-9">{{ offer.home.furniture }}</dd>
+                      {% endif %}
+                  {% if offer.plot %}
+                      <dt class="col-sm-3">Rodzaj:</dt>
+                    <dd class="col-sm-9">{{ offer.plot.type }}</dd>
+                  {% endif %}
+
+                  {% if offer.office %}
+                      <dt class="col-sm-3">Przeznaczenie lokalu:</dt>
+                    <dd class="col-sm-9">{{ offer.office.type }}</dd>
+                      <dt class="col-sm-3">Poziom:</dt>
+                    <dd class="col-sm-9">{{ offer.office.level }}</dd>
+                  {% endif %}
+
+                    <dt class="col-sm-3">Powierzchnia: </dt>
+                    <dd class="col-sm-9">{{ offer.area }}</dd>
+                    <dt class="col-sm-3">Typ oferty: </dt>
+                    <dd class="col-sm-9">{{ offer.type_offerts }}</dd>
+                    <dt class="col-sm-3">Lokalizacja: </dt>
+                    <dd class="col-sm-9">{{ offer.location }}</dd>
+                      <dt class="col-sm-3">Data dodania: </dt>
+                    <dd class="col-sm-9">{{ offer.create_date }}</dd>
+
+
+
+                  </dl>
+                  <h3 class="mb-5">Opis</h3>
+                  <p>{{ offer.description }}</p>
+                </div>
+
+                         <form method="post" action="/deloffer/{{ offer.id }}">
+                            {% csrf_token %}
+                    					<div class="form-group d-flex justify-content-start">
+						<button type="submit" class="btn btn-danger rounded-0 text-light m-1">Usuń</button>
+					</div>
+                            </form>
+                <div class="product-comments">
+                  <h5 class="mb-2">Treść wiadomości</h5>
+                  <form action="" class="form-inline mb-5">
+                    <textarea name="" id="" cols="50" rows="2" class="form-control mr-4" placeholder="Napisz..."></textarea><button class="btn btn-lg btn-primary">Wyślij</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</main>
+{% endblock %}

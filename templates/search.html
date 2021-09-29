@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/adv.css' %}">
+    <script src="{% static 'js/app.js' %}"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+    </form>
+    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
+                            <form method="post" class="card card-sm">
+                                <div class="card-body row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col">
+                                        {% csrf_token %}
+                                             {{ form.as_p }}
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col-auto">
+                                        <input class="btn btn-lg btn-success" type="submit" value="Szukaj">
+
+                                    </div>
+                                    <!--end of col-->
+                                </div>
+                            </form>
+                        </div>
+                        <!--end of col-->
+                    </div>
+</div>
+
+{% for obj_list in obj_lists %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+                    <!-- Begin Listing: 609 W GRAVERS LN-->
+                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
+                        <div class="media">
+                                        {% if obj_list.photos %}
+                                            <a class="pull-left" href='/offer/{{ obj_list.id }}' target="_parent">
+                                                <img src="{{ obj_list.photos.url }}"  width="300" height="200"></a>
+                {% endif %}
+                            <div class="media-body fnt-smaller">
+                                <a href="#" target="_parent"></a>
+                               <h1><a href='/offer/{{ obj_list.id }}'>{{ obj_list.title }} </a></h1>
+                                 <h2 class="media-heading">
+                                  <a >Cena: {{ obj_list.price }} zł </a></h2>
+                                <h3>Lokalizacja: {{ obj_list.location }}</h3>
+                                <h4>Kategoria: {{ obj_list.type }}</h4>
+                                <h4>Data dodania:{{ obj_list.create_date }}</h4>
+                            </div>
+                        </div>
+                    </div><!-- End Listing-->
+                </div><!-- End Col -->
+            </div><!-- End row -->
+        </div><!-- End container -->
+</main>
+
+     {% endfor %}
+{% endblock %}
+
+
